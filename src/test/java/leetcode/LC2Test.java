@@ -10,11 +10,11 @@ import org.junit.Test;
 public class LC2Test {
     @Test public void soluction1Test() {
         var lc = new LC2();
-        // assertEquals(buildList(new int[]{0}), buildList(new int[]{0}));
-        // assertEquals(buildList(new int[]{0}),
-                     // lc.solution1(buildList(new int[]{0}), buildList(new int[]{0})));
-        // assertEquals(buildList(new int[]{9,9,9}),
-        //              lc.solution1(buildList(new int[]{0}), buildList(new int[]{9,9,9})));
+        assertEquals(buildList(new int[]{0}), buildList(new int[]{0}));
+        assertEquals(buildList(new int[]{0}),
+                     lc.solution1(buildList(new int[]{0}), buildList(new int[]{0})));
+        assertEquals(buildList(new int[]{9,9,9}),
+                     lc.solution1(buildList(new int[]{0}), buildList(new int[]{9,9,9})));
         assertEquals(buildList(new int[]{0, 0, 0, 1}),
                      lc.solution1(buildList(new int[]{1}), buildList(new int[]{9,9,9})));
     }
