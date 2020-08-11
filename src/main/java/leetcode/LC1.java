@@ -13,6 +13,8 @@ public class LC1 {
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], i);
         }
+
+        // TODO use stream each?
         for (int i = 0; i < nums.length; i++) {
             var match = target - nums[i];
             var matchIndex = map.get(match);
