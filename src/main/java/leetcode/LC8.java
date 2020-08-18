@@ -2,8 +2,12 @@
 
 package leetcode;
 
+import java.util.Map;
+
 public class LC8 {
     public int solution1(String str) {
+        // var map = Map.of('0', 0, '1', 1, '2', 2, '3', 3, '4', 4,
+        //        '5', 5, '6', 6, '7', 7, '8', 8, '9', 9);
         var i = 0;
         var negative = false;
         var result = 0L;
