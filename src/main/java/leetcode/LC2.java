@@ -40,11 +40,11 @@ public class LC2 {
     }
 
     private ListNode solution1Helper(final ListNode l1, final ListNode l2, final int carry) {
-        System.out.println("-------------------------------------------");
-        System.out.println(l1);
-        System.out.println(l2);
-        System.out.println(carry);
-        System.out.println("-------------------------------------------");
+        // System.out.println("-------------------------------------------");
+        // System.out.println(l1);
+        // System.out.println(l2);
+        // System.out.println(carry);
+        // System.out.println("-------------------------------------------");
         if (l1 != null && l2 != null) {
             final var sum = l1.val + l2.val + carry;
             if (sum < 10) {
