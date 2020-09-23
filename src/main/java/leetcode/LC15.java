@@ -1,59 +1,53 @@
 // 3Sum
-
-import org.jetbrains.annotations.NotNull;
+package leetcode;
 
 import java.lang.reflect.Array;
 import java.util.*;
 
 public class LC15 {
-    public List<List<Integer>> solution1(int @NotNull [] nums) {
+    public List<List<Integer>> solution1(int[] nums) {
         Arrays.sort(nums);
-        Map<Integer, List<Integer>> mapping = new HashMap<>();
+        Map<Integer, Integer> mapping = new HashMap<>();
         List<List<Integer>> result = new LinkedList<>();
+        List<Integer> uniqueNums = new ArrayList<>();
 
-        var threeZerosOrMore = false;
-        for (var i = 0; i < nums.length; i++) {
-            var indexes = mapping.get(nums[i]);
-            if (indexes == null) {
-                var newIndexes = new LinkedList<Integer>();
-                newIndexes.add(i);
-                mapping.put(nums[i], newIndexes);
+        var i = 0;
+        while (i < nums.length) {
+            var j = i + 1;
+            while (j < nums.length && nums[j] == nums[i]) {
+                j += 1;
+            }
+            mapping.put(nums[i], i);
+            i = j;
+        }
+
+        i = 0;
+        while (i < nums.length) {
+            uniqueNums.add(nums[i]);
+            var j = i + 1;
+            while (j < nums.length && nums[j] == nums[i]) {
+                j += 1;
+            }
+            if (nums[i] == 0) {
+                if (j - i >= 3) {
+                    result.add(List.of(0, 0, 0));
+                }
             } else {
-                if (nums[i] == 0 && indexes.size() == 2) {
-                    threeZerosOrMore = true;
-                } else if (indexes.size() < 2){
-                    indexes.add(i);
+                if (j - i >= 2) {
+                    var third = 0 - nums[i] - nums[i];
+                    if (mapping.get(third) != null) {
+                        result.add(List.of(nums[i], nums[i], third));
+                    }
                 }
             }
-        }
-        if (threeZerosOrMore) {
-            result.add(List.of(0, 0, 0));
+            i = j;
         }
 
-        for (var i = 0; i < nums.length - 2; i++) {
-            var firstLocations = mapping.get(nums[i]);
-            if (firstLocations.get(0) != i) {
-                break;
-            } else {
-                for (var j = i + 1; j < nums.length - 1; j++) {
-                    var secondLocations = mapping.get(nums[j]);
-                    if (nums[i] == nums[j]) {
-                        if (firstLocations.get(1) != j) break;
-                    } else {
-                        if (secondLocations.get(0) != j) break;
-                    }
-                    var third = -nums[i] - nums[j];
-                    if (third == nums[i]) {
-                        if (firstLocations.get(1) <= j) break;
-                    } else if (third == nums[j]) {
-                        if (secondLocations.get(1) <= j) break;
-                    } else {
-                        var thirdLocations = mapping.get(third);
-                        if (thirdLocations == null) break;
-                        var thirdLoc = thirdLocations.get(0);
-                        if (thirdLoc <= j) break;;
-                    }
-                    result.add(List.of(nums[i], nums[j], third));
+        for (i = 0; i < uniqueNums.size() - 1; i++) {
+            for (var j = i + 1; j < uniqueNums.size(); j++) {
+                var third = 0 - uniqueNums.get(i) - uniqueNums.get(j);
+                if (uniqueNums.get(i) < third && uniqueNums.get(j) < third && mapping.get(third) != null) {
+                    result.add(List.of(uniqueNums.get(i), uniqueNums.get(j), third));
                 }
             }
         }
@@ -61,3 +55,4 @@ public class LC15 {
         return result;
     }
 }
+
